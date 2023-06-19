@@ -2,7 +2,6 @@ const Sequelize = require("sequelize");
 const db = require("../database");
 const Order = require("./Order");
 
-// Album
 const Product = db.define("product", {
   name: {
     type: Sequelize.STRING,
@@ -20,26 +19,18 @@ const Product = db.define("product", {
     type: Sequelize.INTEGER,
     defaultValue: 5,
   },
-  popularity: {
-    type: Sequelize.INTEGER,
-    defaultValue: 50,
-  },
   image: {
     type: Sequelize.STRING,
     defaultValue:
-      "https://www.furnacemfg.com/wp-content/uploads/2018/12/black_vinyl.jpg",
+      "https://www.orbcfamily.org/site/wp-content/uploads/2019/04/Depositphotos_225669932_s-2019.jpg",
   },
-  spotifyId: {
+  category: {
     type: Sequelize.STRING,
   },
-  trackTotal: {
-    type: Sequelize.INTEGER,
-  },
-  releaseDate: {
+  authorFirst: {
     type: Sequelize.STRING,
-    notNull: true,
   },
-  label: {
+  authorLast: {
     type: Sequelize.STRING,
   },
 });

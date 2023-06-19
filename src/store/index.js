@@ -1,12 +1,13 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import accountReducer from "./reducers/accountSlice";
-import adminReducer from "./reducers/adminSlice";
-import albumReducer from "./reducers/albumSlice";
+import userReducer from "./reducers/userSlice";
 import authReducer from "./reducers/authSlice";
+import writerReducer from "./reducers/writerSlice";
+import adminReducer from "./reducers/adminSlice";
+import productReducer from "./reducers/productSlice";
 import cartReducer from "./reducers/cartSlice";
-import orderReducer from "./reducers/orderSlice";
-import genreReducer from "./reducers/genreSlice";
+import eventReducer from "./reducers/eventSlice";
+import postReducer from "./reducers/postSlice";
 import {
   persistReducer,
   persistStore,
@@ -20,13 +21,14 @@ import {
 import storage from "redux-persist/lib/storage";
 
 const rootReducer = combineReducers({
-  account: accountReducer,
-  admin: adminReducer,
-  album: albumReducer,
   auth: authReducer,
+  user: userReducer,
+  writer: writerReducer,
+  admin: adminReducer,
+  product: productReducer,
   cart: cartReducer,
-  order: orderReducer,
-  genre: genreReducer,
+  event: eventReducer,
+  post: postReducer,
 });
 
 const persistConfig = {

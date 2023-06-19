@@ -1,7 +1,7 @@
 {
-    "name": "wayback_vinyl",
+    "name": "deeper_well_1",
     "version": "0.0.1",
-    "description": "",
+    "description": "Second example of Deeper Well Church site",
     "main": "webpack.config.js",
     "scripts": {
         "build": "webpack",
@@ -18,8 +18,13 @@
         "css-watch": "npm run css-build -- --watch"
     },
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "author": "sllozier",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sllozier/deeper_well_church_2.git"
+    },
+    "bugs": "https://github.com/sllozier/deeper_well_church_2/issues",
     "dependencies": {
         "@creativebulma/bulma-divider": "^1.1.0",
         "@fortawesome/fontawesome-free": "^6.2.0",
@@ -53,6 +58,8 @@
         "sequelize": "^6.20.0",
         "slick-carousel": "^1.8.1",
         "sweetpagination": "^1.0.15",
+        "typewriter-effect": "^2.20.1",
+        "vara": "^1.4.1",
         "volleyball": "^1.5.1"
     },
     "devDependencies": {

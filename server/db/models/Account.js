@@ -7,15 +7,28 @@ const JWT = process.env.TOKEN;
 
 const SALT_ROUNDS = 5;
 
-// NOTE: need to add authentication (jwt)
 const Account = db.define("account", {
+  fName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
+  lName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+    },
+  },
   username: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
   },
   password: {
-    type: Sequelize.STRING, // needs to be encrypted?
+    type: Sequelize.STRING,
     allowNull: false,
   },
   email: {
@@ -26,38 +39,43 @@ const Account = db.define("account", {
       notEmpty: true,
     },
   },
-  firstName: {
-    type: Sequelize.STRING,
+  userType: {
+    type: Sequelize.ENUM("ADMIN", "WRITER", "USER"),
+    defaultValue: "USER",
     allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true,
-    },
   },
   isAdmin: {
-    // true = admin account, false = user account
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
+    type: Sequelize.VIRTUAL,
+    get() {
+      return this.userType === "ADMIN";
+    },
   },
-  address: {
+  isWriter: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return this.userType === "WRITER";
+    },
+  },
+  isUser: {
+    type: Sequelize.VIRTUAL,
+    get() {
+      return this.userType === "USER";
+    },
+  },
+  bio: {
+    type: Sequelize.TEXT,
+  },
+  profileImg: {
     type: Sequelize.STRING,
+    validate: {
+      isUrl: true,
+    },
   },
-  // paymentInfo: {
-  //   type: Sequelize.STRING,
-  //   defaultValue: 'XXX-XXX-XXXX',
-  // }
 });
 
 //AUTH
 
 Account.prototype.comparePassword = function (pswd) {
-  // console.log('PSWD', pswd);
   return bcrypt.compare(pswd, this.password);
 };
 
@@ -67,9 +85,7 @@ Account.prototype.generateToken = function () {
 
 Account.byToken = async function (token) {
   try {
-    // console.log('MODEL TOKEN', token)
     const { id } = await jwt.verify(token, JWT);
-    //console.log('MODEL ID', id)
     const account = Account.findByPk(id);
     if (!account) {
       throw "nooo";
@@ -102,15 +118,32 @@ const hashPassword = async function (account) {
   }
 };
 
+Account.findAdminPosts = async function (id) {
+  return this.findByPk(id, {
+    where: {
+      userType: "ADMIN",
+    },
+    include: {
+      model: Post,
+      as: "adminPost",
+    },
+  });
+};
+
+Account.findWriterPosts = async function (id) {
+  return this.findByPk(id, {
+    where: {
+      userType: "WRITER",
+    },
+    include: {
+      model: Post,
+      as: "writerPost",
+    },
+  });
+};
+
 Account.beforeCreate(hashPassword);
 Account.beforeUpdate(hashPassword);
 Account.beforeBulkCreate((accounts) => Promise.all(account.map(hashPassword)));
-
-//cart prototypes
-
-Account.prototype.addToCart = () => {};
-Account.prototype.createOrder = () => {};
-Account.prototype.cancelOrder = () => {};
-Account.prototype.cancelOrder = () => {};
 
 module.exports = Account;

@@ -1,38 +1,11 @@
 import React from "react";
-import AdCarousel from "./AdCarousel";
-import HomeHero from "./HomeHero";
-import ViewAllAlbums from "../../albumPages/ViewAllAlbums";
-import CallToAction from "./CallToAction";
+import Hero from "../Hero/Hero";
+//can import separate components if Homepage needs a ton of stuff
 
 const Home = () => {
   return (
     <>
-      <div className="container is-family-monospace"></div>
-      <div className="container has-background-warning is-fluid">
-        <HomeHero />
-      </div>
-
-      <div className="container has-background-danger is-fluid ">
-        <AdCarousel />
-      </div>
-
-      <div className="container has-background-warning is-fluid is-family-monospace">
-        <ViewAllAlbums />
-      </div>
-
-      <CallToAction />
-
-      <div className="divider is-warning is-family-monospace">
-        Footer Component
-      </div>
-      <h1 className="has-background-warning is-family-monospace">
-        Footer includes: comps
-        <p>
-          Help & FAQ: rewards prog, about, contact us, FAQ, Privacy Pol, Terms,
-          Return Pol; My Acct: Login, Wish List, OrderHistory, Cart; Follow SM:
-          IG, FB, Tw, Em, YouTube
-        </p>
-      </h1>
+      <Hero />
     </>
   );
 };

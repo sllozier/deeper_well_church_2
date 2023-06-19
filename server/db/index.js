@@ -2,44 +2,46 @@
 // with your models, for which you'll find some blank files in this directory:
 
 const db = require("./database");
-
+const Post = require("./models/Post");
 const Account = require("./models/Account");
-const Order = require("./models/Order");
-const Product = require("./models/Product");
-const Track = require("./models/Track");
-const Artist = require("./models/Artist");
 const Tag = require("./models/Tag");
+const Comment = require("./models/Comment");
+const Event = require("./models/Event");
+const Product = require("./models/Product");
+const Order = require("./models/Order");
 const LineItem = require("./models/LineItem");
-//test this.
+//Import models here
 //associations
-Order.belongsTo(Account);
+//ACCOUNT
+Account.hasMany(Post);
+Post.belongsTo(Account, { as: "writerPost", foreignKey: "writerId" });
+Post.belongsTo(Account, { as: "adminPost", foreignKey: "adminId" });
+
+Account.hasMany(Comment);
+Comment.belongsTo(Account);
+
 Account.hasMany(Order);
+Order.belongsTo(Account);
 
-// Order.hasMany(LineItem);
-// LineItem.belongsTo(Order);
+//POST
+Post.belongsToMany(Tag, { through: "posttag" });
+Tag.belongsToMany(Post, { through: "posttag" });
 
-// Product.hasMany(LineItem);
-// LineItem.belongsTo(Product);
+Post.hasMany(Comment);
+Comment.belongsTo(Post);
 
+//ORDERS
 Product.belongsToMany(Order, { through: LineItem });
 Order.belongsToMany(Product, { through: LineItem });
 
-// Tag.belongsToMany(Product, { through: "productTag" });
-// Product.belongsToMany(Tag, { through: "productTag" });
-
-Product.hasMany(Track);
-Track.belongsTo(Product);
-
-Artist.hasMany(Product);
-Product.belongsTo(Artist);
-
 module.exports = {
   db,
+  Post,
   Account,
   Tag,
-  Order,
+  Comment,
+  Event,
   Product,
-  Track,
-  Artist,
+  Order,
   LineItem,
 };

@@ -2,20 +2,22 @@
 
 @import "./fontawesome/_all.scss";
 @import "./base/_all.sass";
-@import "./components/_all.sass";
 @import "./fontawesome/solid.scss";
 @import "./fontawesome/brands.scss";
 @import "./fontawesome/regular.scss";
 
-@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&family=Questrial&family=Satisfy&display=swap');
+
+
 @import "../../node_modules/bulma/bulma.sass";
-@import "../../node_modules/slick-carousel/slick/slick.scss";
-@import "../../node_modules/slick-carousel/slick/slick-theme.scss";
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@100;400&display=swap');
+@import url('https://fonts.cdnfonts.com/css/brittany-signature');
 
-
+// Set your brand colors
 
 
 // Import only what you need from Bulma
+// @import"../../node_modules/bulma-carousel/src/sass/index.sass";
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/_all.sass";
 @import "../../node_modules/bulma/sass/elements/button.sass";
@@ -25,6 +27,4 @@
 @import "../../node_modules/bulma/sass/components/navbar.sass";
 @import "../../node_modules/bulma/sass/layout/hero.sass";
 @import "../../node_modules/bulma/sass/layout/section.sass";
-@import "../../node_modules/@creativebulma/bulma-divider";
-@import "../../node_modules/bulma-list/sass/bulma-list.sass";
-@import"../../node_modules/@creativebulma/bulma-tooltip/src/sass/index.sass";
+// @import"../../node_modules/@creativebulma/bulma-tooltip/src/sass/index.sass";
